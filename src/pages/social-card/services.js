@@ -10,7 +10,7 @@ const cardsData = [
         content: `Learning React? Start small. { author: @dcddia }`,
         hasExternalSource: true,
         externalSource: {
-          image: 'https://picsum.photos/id/248/500/200',
+          image: 'https://picsum.photos/id/248/400/200',
           title: 'Learning React? Start Small.',
           content: `Can't pry yourself away from the tutorials? The cure is to make tiny little experiment apps.`,
           link: 'dev.to'
@@ -24,7 +24,7 @@ const cardsData = [
         retweet: {
           count: 190,
         },
-        user: {
+        userInSession: {
           hasRetweeted: true,
           hasLiked: false,
         }
@@ -41,7 +41,7 @@ const cardsData = [
         content: `Learn javascript: ES6 features`,
         hasExternalSource: true,
         externalSource: {
-          image: 'https://picsum.photos/id/883/500/200',
+          image: 'https://picsum.photos/id/883/400/200',
           title: 'Learn javascript: ES6 features',
           content: 'Are you confused with ES6 new features?, i explain you everything',
           link: 'mikedev.to'
@@ -55,7 +55,7 @@ const cardsData = [
         retweet: {
           count: 230,
         },
-        user: {
+        userInSession: {
           hasRetweeted: true,
           hasLiked: true,
         }
@@ -80,7 +80,7 @@ const cardsData = [
         retweet: {
           count: 30,
         },
-        user: {
+        userInSession: {
           hasRetweeted: false,
           hasLiked: true,
         }

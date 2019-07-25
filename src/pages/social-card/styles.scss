@@ -1,3 +1,10 @@
+.social-cards-page {
+    margin: auto;
+    width: fit-content;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
 .social-card {
     width: 400px;
     border: 1px solid #000;
@@ -7,13 +14,29 @@
 
     &--header{
 
-        &__username {
+        &__nickname {
             font-weight: bold;
         }
-        &__userlink,
+        &__username,
         &__date {
             color: #657786;
             font-size: 0.8em;
+        }
+    }
+
+    &--actions {
+        .social-card__action {
+            color: #657786;
+            margin: 0 10px;
+            cursor: pointer;
+
+            &.retweet.active {
+                color: #6fc129;
+            }
+
+            &.like.active {
+                color: #c12951;
+            }
         }
     }
 }
@@ -23,5 +46,10 @@
     &__content {
         color: #657786;
         font-size: 0.8em;
+    }
+
+    &__footer {
+        color: #657786;
+        font-size: 0.6em;
     }
 }

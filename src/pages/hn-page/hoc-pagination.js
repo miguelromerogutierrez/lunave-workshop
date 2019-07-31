@@ -40,8 +40,7 @@ export default function withHOCPagination(Component) {
         getProps = () => {
             const { data, itemsPerPage, ...state } = this.state;
             return {
-                ...state,
-                setData: this.setData
+                ...state
             }
         }
     

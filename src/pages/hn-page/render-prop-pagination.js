@@ -43,7 +43,7 @@ export default class Pagination extends Component {
     getProps = () => {
         const { data, itemsPerPage, ...state } = this.state;
         return {
-            ...state,
+          ...state,
         }
     }
 

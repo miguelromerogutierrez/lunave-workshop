@@ -54,6 +54,10 @@ class RegisterForm extends React.Component {
     return (
       <div className="App">
 
+        <button onClick={() => {
+          this.props.history.push('/social-cards')
+        }}>Redirect To Social Cards</button>
+
         <InputField
           name="username"
           type="text"

@@ -27,6 +27,10 @@ const menuItems = [
   {
     name: 'Credict card form',
     path: '/cc-form'
+  },
+  {
+    name: 'Payment form',
+    path: '/payment-form'
   }
 ]
 

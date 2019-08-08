@@ -18,14 +18,15 @@ import Select, { InvexFieldSelect, InvexMenuItem } from '../ui/Select';
 import * as services from './services';
 
 const ccSchemaValidations = yup.object().shape({
-  ccNumber: yup.string().length(16, 'Debe contener 16 digitos').matches(/[0-9]+/, 'Debe contener solo digitos'),
+  ccNumber: yup.string()
+    .matches(/[0-9]{16}/, 'Debe contener 16 digitos'),
   ccMonthExpired: yup.string().required("Debes llenar el campo mes"),
   ccYearExpired: yup.string().required("Debes llenar el campo año"),
-  ccCvv: yup.string().length(3, 'Debe contener 3 digitos'),
-  ccOwnerName: yup.string().required('Este campo es requerido'),
-  ccOwnerLastName: yup.string().required('Este campo es requerido'),
+  ccCvv: yup.string().length(3, 'Debe contener 3 digitos').required('Debes llenar este campo'),
+  ccOwnerName: yup.string().max(50, 'Debe contener un minimo de 50 caracteres').required('Este campo es requerido'),
+  ccOwnerLastName: yup.string().max(50, 'Debe contener un minimo de 50 caracteres').required('Este campo es requerido'),
   ccAddress1: yup.string().required('Este campo es requerido'),
-  ccAddress2: yup.string().required('Este campo es requerido'),
+  ccAddress2: yup.string(),
   ccCity: yup.string().required('Este campo es requerido'),
   ccState: yup.string().required('Este campo es requerido'),
   ccZipCode: yup.string().required('Este campo es requerido'),
@@ -70,6 +71,9 @@ export default class CCForm extends React.Component {
   }
 
   handleSubmit = (values) => {
+    if (typeof this.props.onSubmit === 'function') {
+      return this.props.onSubmit(values)
+    }
     services.submitForm(values)
       .then((result) => {
         if (result.status === 200) {
@@ -309,37 +313,31 @@ function CCSection({ touched, values, errors, handleBlur, handleChange }) {
         onBlur={handleBlur}
         onChange={handleChange}
       />
-      <FormControl error={touched.ccMonthExpired && errors.ccMonthExpired}>
-        <InputLabel htmlFor="ccMonthExpired">Mes</InputLabel>
-        <Select
-          value={values.ccMonthExpired}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          inputProps={{
-            name: 'ccMonthExpired',
-            id: 'ccMonthExpired',
-          }}
-        >
-          <MenuItem value={1}>Ene</MenuItem>
-          <MenuItem value={2}>Feb</MenuItem>
-          <MenuItem value={3}>Mar</MenuItem>
-          <MenuItem value={4}>Abr</MenuItem>
-          <MenuItem value={5}>Jun</MenuItem>
-        </Select>
-        {
-          touched.ccMonthExpired && errors.ccMonthExpired &&
-          <FormHelperText>{errors.ccMonthExpired}</FormHelperText>
-        }
-      </FormControl>
       <InvexFieldSelect
         error={touched.ccMonthExpired && errors.ccMonthExpired}
+        id={'ccMonthExpired'}
+        labelText={'Mes'}
+        value={values.ccMonthExpired}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        name={'ccMonthExpired'}
+        hasError={!!(touched.ccMonthExpired && errors.ccMonthExpired)}
+      >
+        <InvexMenuItem value={1}>Ene</InvexMenuItem>
+        <InvexMenuItem value={2}>Feb</InvexMenuItem>
+        <InvexMenuItem value={3}>Mar</InvexMenuItem>
+        <InvexMenuItem value={4}>Abr</InvexMenuItem>
+        <InvexMenuItem value={5}>Jun</InvexMenuItem>
+      </InvexFieldSelect>
+      <InvexFieldSelect
+        error={touched.ccYearExpired && errors.ccYearExpired}
         id={'ccYearExpired'}
         labelText={'Año'}
         value={values.ccYearExpired}
         onChange={handleChange}
         onBlur={handleBlur}
         name={'ccYearExpired'}
-        hasError={!!(touched.ccMonthExpired && errors.ccMonthExpired)}
+        hasError={!!(touched.ccYearExpired && errors.ccYearExpired)}
       >
         <InvexMenuItem value={1}>2019</InvexMenuItem>
         <InvexMenuItem value={2}>2020</InvexMenuItem>
@@ -353,6 +351,9 @@ function CCSection({ touched, values, errors, handleBlur, handleChange }) {
         value={values.ccCvv}
         onChange={handleChange}
         onBlur={handleBlur}
+        inputProps={
+          {maxLength: 3}
+        }
       />
     </div>
 

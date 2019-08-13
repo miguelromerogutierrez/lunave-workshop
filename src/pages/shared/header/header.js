@@ -31,6 +31,10 @@ const menuItems = [
   {
     name: 'Payment form',
     path: '/payment-form'
+  },
+  {
+    name: 'Payment form Routes',
+    path: '/payment-form-routes'
   }
 ]
 

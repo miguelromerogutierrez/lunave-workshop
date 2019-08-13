@@ -10,12 +10,13 @@ import HNPageRedux from '../hn-page/redux'
 import CCForm from '../creditcard-form/cc-form';
 import { HeaderWithRouter as Header } from '../shared/header/header';
 import PaymentForm from '../payment-form/payment-form';
+import PaymentFormRoutes from '../payment-form-routes/payment-form';
 
 export default function Dashboard(props) {
-  if (props.user === null) {
-    props.history.push('/');
-    return null;
-  }
+  // if (props.user === null) {
+  //   props.history.push('/');
+  //   return null;
+  // }
   return (
     <Router basename="/dashboard">
       <Header />
@@ -25,7 +26,9 @@ export default function Dashboard(props) {
       <Route path="/hacker-news-rp" exact component={HNPageRP} />
       <Route path="/hacker-news-redux" exact component={HNPageRedux} />
       <Route path="/cc-form" exact component={CCForm} />
-      <Route path="/payment-form" exact component={PaymentForm} />
+      <Route path="/payment-form" exact 
+      component={PaymentForm} />
+      <Route path="/payment-form-routes" component={PaymentFormRoutes} />
     </Router>
   )
 }

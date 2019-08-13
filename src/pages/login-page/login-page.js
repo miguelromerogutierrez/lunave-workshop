@@ -51,7 +51,6 @@ export default function Login(props) {
       >
         {
           (formikProps) => {
-            console.log(formikProps);
             return (
               <form onSubmit={formikProps.handleSubmit}>
                 <h1>Login</h1>

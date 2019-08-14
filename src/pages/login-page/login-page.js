@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import login from '../../redux/actions/login';
 
 import './styles.scss';
 
@@ -36,11 +38,16 @@ export default function Login(props) {
     props.history.push('/dashboard');
   }
   const handleSubmit = (values, formikProps) => {
-    
-    props.login({
-      username: 'Miguel',
-      id: 1,
-    });
+    // ... validaciones 
+    // ... api request
+    axios.get('https://jsonplaceholder.typicode.com/users/1')
+    .then((result) => {
+        // ... si exito
+        props.login(result.data);
+      })
+      .catch((result) => {});
+
+    // ... si no manejamos el error
   }
   return (
     <div className="form-page">
@@ -86,18 +93,18 @@ export default function Login(props) {
   )
 }
 
-const login = (user) => {
-  return { type: 'LOGIN_USER', user }
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+};
+
+const mapDispatchersTopros =   {
+  login
 };
 
 const withConnectForLanding = connect(
-  (state) => {
-    return {
-      user: state.user
-    }
-  },
-  {
-    login
-  }
+  mapStateToProps,
+  mapDispatchersTopros
 );
 export const LoginRedux = withConnectForLanding(Login);

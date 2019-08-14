@@ -11,15 +11,17 @@ import CCForm from '../creditcard-form/cc-form';
 import { HeaderWithRouter as Header } from '../shared/header/header';
 import PaymentForm from '../payment-form/payment-form';
 import PaymentFormRoutes from '../payment-form-routes/payment-form';
+import UpdateUser from '../jsonplaceholder';
 
 export default function Dashboard(props) {
-  // if (props.user === null) {
-  //   props.history.push('/');
-  //   return null;
-  // }
+  if (props.user === null) {
+    props.history.push('/');
+    return null;
+  }
   return (
     <Router basename="/dashboard">
       <Header />
+      <Route path="/" exact component={UpdateUser} />
       <Route path="/register-form" exact component={RegisterForm} />
       <Route path="/social-cards" exact component={SocialCard} />
       <Route path="/hacker-news" exact component={HNPage} />

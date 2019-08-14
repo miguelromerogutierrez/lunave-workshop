@@ -52,6 +52,7 @@ function Header(props, context) {
             </li>
           )
         }
+        <li>{props.username}</li>
         <li><button onClick={props.logout}>Logout</button></li>
       </ul>
     </div>
@@ -62,10 +63,18 @@ const logout = () => {
   return { type: 'LOGOUT_USER' };
 }
 
+const mapStateToProps = (state) => {
+  return {
+    username: state.user.username
+  };
+};
+
+const mapDispatchersToProps = {
+  logout
+};
+
 const withConnectForHeader = connect(
-  () => {},
-  {
-    logout
-  }
+  mapStateToProps,
+  mapDispatchersToProps
 )
 export const HeaderWithRouter = withConnectForHeader(withRouter(Header));

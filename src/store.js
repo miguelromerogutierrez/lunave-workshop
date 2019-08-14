@@ -7,6 +7,7 @@ const initialStateUser = {
 const userReducer = (state = initialStateUser, actions) => {
   switch(actions.type) {
     case 'LOGIN_USER':
+    case 'UPDATE_USER':
       return { user: actions.user };
     case 'LOGOUT_USER':
       return { user: null };

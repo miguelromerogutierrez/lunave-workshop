@@ -95,7 +95,7 @@ class PaymentForm extends React.Component {
         : `$${formatMoney(this.state.customAmount)}`;
       const creditCard = this.state.creditCards.find(cc => cc.id === this.state.paymentMetod)
       return (
-        <div>
+        <div data-testid="detail">
           <table>
             <tr>
               <th>Monto</th>
@@ -140,11 +140,11 @@ class PaymentForm extends React.Component {
           </div>
 
           <div className={cpaClassNames}>
-            <input type="radio" value="cpa" name="paymentAmount" id="paymentAmount-cpa" onChange={this.handleChangePaymentAmount} checked={paymentAmount === 'cpa'} />
+            <input type="radio" value="cpa" data-testid="paymentamount-cpa" name="paymentAmount" id="paymentAmount-cpa" onChange={this.handleChangePaymentAmount} checked={paymentAmount === 'cpa'} />
             <label htmlFor="paymentAmount-cpa">
               <div>
                 <p>Su pago</p>
-                <Input type="text" name="customAmount" value={formatMoney(this.state.customAmount)} onChange={this.handleChangeCustomAmount} ref={inputRef} disabled={paymentAmount !== 'cpa'} />
+                <Input type="text" name="customAmount" value={formatMoney(this.state.customAmount)} onChange={this.handleChangeCustomAmount} ref={inputRef} disabled={paymentAmount !== 'cpa'} data-testid="custominput" />
               </div>
             </label>
           </div>
@@ -155,7 +155,7 @@ class PaymentForm extends React.Component {
             {
               this.state.creditCards.map((cc) => (
                 <div className={classnames('cc', { active: cc.id === this.state.paymentMetod })}>
-                  <input type="radio" name="paymentMethod" id={`paymentMethod-${cc.id}`} value={cc.id} onChange={this.handleChangePaymentMethod} />
+                  <input type="radio" name="paymentMethod" id={`paymentMethod-${cc.id}`} value={cc.id} onChange={this.handleChangePaymentMethod} data-testid={`paymentmethod-${cc.id}`} />
                   <label htmlFor={`paymentMethod-${cc.id}`}>
                     <div className="cc-container">
                       <span>{cc.number}</span>
@@ -173,7 +173,7 @@ class PaymentForm extends React.Component {
           }
           <button onClick={this.handleClickAddCC}>Agregar otra</button>
         </div>
-        <button onClick={this.handleClickNextStep}>Siguiente</button>
+        <button data-testid="next" onClick={this.handleClickNextStep}>Siguiente</button>
       </div>
     )
   }

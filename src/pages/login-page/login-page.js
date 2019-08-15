@@ -33,7 +33,7 @@ export default function Login(props) {
     userName: 'Mike',
     password: ''
   }
-
+  console.log(props.user);
   if (props.user !== null) {
     props.history.push('/dashboard');
   }
@@ -43,6 +43,7 @@ export default function Login(props) {
     axios.get('https://jsonplaceholder.typicode.com/users/1')
     .then((result) => {
         // ... si exito
+        console.log(result)
         props.login(result.data);
       })
       .catch((result) => {});
@@ -53,13 +54,12 @@ export default function Login(props) {
     <div className="form-page">
       <Formik
         initialValues={schema}
-        validationSchema={SignupSchema}
         onSubmit={handleSubmit}
       >
         {
           (formikProps) => {
             return (
-              <form onSubmit={formikProps.handleSubmit}>
+              <form onSubmit={formikProps.handleSubmit} data-testid="form">
                 <h1>Login</h1>
                 <TextField
                   error={formikProps.errors.userName && formikProps.touched.userName}
@@ -71,6 +71,9 @@ export default function Login(props) {
                   onBlur={formikProps.handleBlur}
                   className={styles.myClass}
                   helperText={formikProps.touched.userName && formikProps.errors.userName}
+                  inputProps={
+                    {'data-testid': 'username'}
+                  }
                 />
                 <TextField
                   error={formikProps.errors.password && formikProps.touched.password}
@@ -82,8 +85,11 @@ export default function Login(props) {
                   label="Password"
                   value={formikProps.values.password}
                   className={styles.myClass}
+                  inputProps={
+                    {'data-testid': 'password'}
+                  }
                 />
-                <Button type="submit">Login</Button>
+                <Button type="submit" data-testid="submit">Login</Button>
               </form>
             );
           }
